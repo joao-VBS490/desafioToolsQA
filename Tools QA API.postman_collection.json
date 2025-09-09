@@ -1,0 +1,292 @@
+{
+	"info": {
+		"_postman_id": "9abd5da3-b1f9-4cab-aea6-1a88c8c1f472",
+		"name": "Tools QA API",
+		"description": "Desafio de automação de apis com tools QA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39656547"
+	},
+	"item": [
+		{
+			"name": "usuarios",
+			"item": [
+				{
+					"name": "criaUsuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//seta o nome do usuário na variavel assim que a request retorna sucesso\r",
+									"const response = pm.response.json()\r",
+									"const userName = response.username\r",
+									"pm.collectionVariables.set('userName', userName);\r",
+									"\r",
+									"//pega o UserId assim que a request roda\r",
+									"const response_userId = pm.response.json()\r",
+									"const userId = response_userId.userID\r",
+									"pm.collectionVariables.set('userId', userId);\r",
+									"\r",
+									"pm.response.to.have.status(201);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"{{$randomUserName}}\",\r\n    \"password\": \"{{senha}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{accountBaseUrl}}User",
+							"host": [
+								"{{accountBaseUrl}}User"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "geraTokenAcesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Seta o valor do token na variavel acessToken após a requisição\r",
+									"const response = pm.response.json()\r",
+									"const acessToken = response.token\r",
+									"pm.collectionVariables.set('acessToken', acessToken);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"{{userName}}\",\r\n    \"password\": \"{{senha}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{accountBaseUrl}}GenerateToken",
+							"host": [
+								"{{accountBaseUrl}}GenerateToken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authorized",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"{{userName}}\",\r\n    \"password\": \"{{senha}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{accountBaseUrl}}Authorized",
+							"host": [
+								"{{accountBaseUrl}}Authorized"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "detalhesUsuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"{{userName}}\",\r\n    \"password\": \"{{senha}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{accountBaseUrl}}User/{{userId}}",
+							"host": [
+								"{{accountBaseUrl}}User"
+							],
+							"path": [
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Pasta relativa a todas as ações de usuário\n\n- Criação\n    \n- gerador de token\n    \n- validação de autorização"
+		},
+		{
+			"name": "Livraria",
+			"item": [
+				{
+					"name": "listaLivros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{booksBaseUrl}}",
+							"host": [
+								"{{booksBaseUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "alugaLivros",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"{{userId}}\",\r\n  \"collectionOfIsbns\": [\r\n      {\"isbn\": \"9781449365035\"},\r\n      {\"isbn\": \"9781449337711\"}\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{booksBaseUrl}}",
+							"host": [
+								"{{booksBaseUrl}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Pasta relativa as ações dentro da livraria\n\n- Lista Livros\n    \n- Aluga livros"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{acessToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "accountBaseUrl",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "acessToken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "userId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "booksBaseUrl",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "userName",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "senha",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
