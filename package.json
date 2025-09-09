@@ -1,0 +1,23 @@
+{
+  "name": "desafiotoolsqa",
+  "version": "1.0.0",
+  "main": "cypress.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joao-VBS490/desafioToolsQA.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joao-VBS490/desafioToolsQA/issues"
+  },
+  "homepage": "https://github.com/joao-VBS490/desafioToolsQA#readme",
+  "description": "",
+  "dependencies": {
+    "cypress": "^15.1.0"
+  }
+}
