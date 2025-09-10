@@ -1,23 +1,11 @@
-const variables = require('../pages/variaveis dinamicas/var_practiceForm');
-class Toolsqa {
-    visitaSite() {
-        cy.visit('https://demoqa.com/');
-        cy.get('img[src="/images/Toolsqa.jpg"]').should('be.visible');
-    }
-    cards() {
-        cy.get('.card-body').then((cards) => {
-            cy.wrap(cards).each((card) => {
-                cy.wrap(card).find('h5').then((titulo) => {
-                    const textoTitulo = titulo.text();
-                    cy.log(textoTitulo);
-                });
-            });
-        });
-        
-    }
-    cardForms(){
+const variables = require('./variaveis dinamicas/var_practiceForm');
+
+class CardForms {
+acessaPracticeForm(){
         cy.visit('/automation-practice-form');
         cy.get('.text-center').should('have.text', 'Practice Form');
+    }
+    preencheForm() {
         cy.get('#firstName').type(variables.firstName); 
         cy.get('#lastName').type(variables.lastName); 
         cy.get('#userEmail').type(variables.email); 
@@ -36,9 +24,12 @@ class Toolsqa {
         cy.get('#city').click(); 
         cy.get('#react-select-4-option-0').click();
         cy.get('#submit').click();
+    }
+    modalSucesso() {
         cy.get('.modal-content').should('be.visible');
         cy.get('#closeLargeModal').click();
-        
     }
+
 };
-export default new Toolsqa();
+
+export default new CardForms();
