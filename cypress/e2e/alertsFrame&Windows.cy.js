@@ -6,5 +6,6 @@ describe('Alerts, Frames & Windows', () => {
         pInicial.cards();
         afw.visitaafw();
         cy.navegaMenu([["Alerts, Frame & Windows"], ["Browser Windows"]]);
+        afw.btnNewWindow();
     });
 });
