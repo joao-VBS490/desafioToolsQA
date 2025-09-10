@@ -5,7 +5,7 @@ Cypress.Commands.add('navegaMenu', (caminho) => {
     caminho.forEach(nivel => {
         const [grupo, subItem] = nivel;
         cy.contains('.group-header', grupo).then($grupo => {
-            if ($grupo.attr('aria-expanded') !== 'true') {
+            if ($grupo.attr('aria-expanded') === 'false') {
                 cy.wrap($grupo).click();
             }
         });

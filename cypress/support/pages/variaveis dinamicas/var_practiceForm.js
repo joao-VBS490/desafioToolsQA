@@ -16,6 +16,9 @@ const hobbies = (($options) =>{
     const hobbie = Math.floor(Math.random() * $options.length);
     cy.wrap($options[hobbie]).click({force: true});
 });
+const idade = faker.number.int({ min: 18, max: 60 });
+const salario = faker.number.int({ min: 1000, max: 10000 });
+const departamento = faker.commerce.department();
 
 module.exports = {
     firstName,
@@ -25,5 +28,8 @@ module.exports = {
     aniversario,
     genero,
     hobbies,
-    rua
+    rua, 
+    idade,
+    salario,
+    departamento
 };
