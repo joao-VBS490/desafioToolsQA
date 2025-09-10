@@ -1,14 +1,16 @@
 import 'cypress-file-upload';
 import menuLateral from './pages/menuLateral';
 
-Cypress.Commands.add('navegaMenu', (caminho) => {
-    caminho.forEach(nivel => {
-        const [grupo, subItem] = nivel;
-        cy.contains('.group-header', grupo).then($grupo => {
-            if ($grupo.attr('aria-expanded') === 'false') {
-                cy.wrap($grupo).click();
-            }
-        });
-        cy.contains('.group-header + .element-list .menu-list > li', subItem).click();
+
+
+Cypress.Commands.add('navegaMenu', (niveis) => {
+  niveis.forEach(nivel => {
+    nivel.forEach((texto, i) => {
+      // tenta primeiro no header-text
+      cy.get('.header-text, .text').contains(texto).click();
+      if (i < nivel.length - 1) {
+        cy.get('.text').contains(nivel[i + 1]).should('be.visible');
+      }
     });
+  });
 });

@@ -1,18 +1,19 @@
 class menuLateral{
-    
-    ListaMenu(caminho){
-        caminho.forEach(nivel => {
-            const [grupo, subGrupo] = nivel;
-            cy.contains('.group-header', grupo).then($grupo => {
-                if ($grupo.attr('aria-expanded') !== 'true') {
-                    cy.wrap($grupo).click();
-                }
+
+    navegaMenu(niveis) {
+        niveis.forEach(nivel => {
+            nivel.forEach((texto, i) => {
+                cy.get('.header-text, .text').contains(texto).click();
+
+                if (i < nivel.length - 1) {
+                    cy.get('.text').contains(nivel[i + 1]).should('be.visible');
+                }   
             });
         });
-        cy.contains('.group-header + .element-list .menu-list > li', subItem).click();
     }
-    
 }
+
+
 
 
 
