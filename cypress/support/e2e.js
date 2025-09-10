@@ -18,3 +18,9 @@ import './commands'
 beforeEach(() => {
   cy.viewport(1280, 1000); // desktop padrão
 });
+Cypress.on('uncaught:exception', (err, runnable) => {
+  if (err.message.includes('Script error.')) {
+      return false;
+    }
+    
+  });
