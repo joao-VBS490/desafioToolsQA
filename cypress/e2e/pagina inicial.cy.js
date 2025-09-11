@@ -8,8 +8,6 @@ describe('Automação da aba forms do Demo QA', () => {
     pInicial.cards();
   });
 
-  it('navegando a aba forms', () => {
-    pInicial.cards();
-  });
 
 });
+
