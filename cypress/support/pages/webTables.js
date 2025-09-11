@@ -3,8 +3,6 @@ const variables = require('./variaveis dinamicas/var_practiceForm');
 class webTables {
     ListaMenu(){
         cy.get('.card-body').contains('Elements').click();
-        cy.navegaMenu(["Elements"], 
-            ["Web Tables"]);
     }
     criaRegistro(){
         cy.get('#addNewRecordButton').click();

@@ -5,6 +5,7 @@ describe('Preenchimento de Web Tables', () => {
         pInicial.visitaSite();
         pInicial.cards();
         webTables.ListaMenu();
+        cy.navegaMenu([['Elements'], ['Web Tables']]);
         webTables.criaRegistro();
         webTables.editaRegistro();
         webTables.deletaRegistro();
